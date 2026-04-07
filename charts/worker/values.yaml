@@ -1,0 +1,16 @@
+image:
+  repository: k3d-registry.localhost:5050/research-agent
+  tag: "latest"
+
+replicas: 1
+
+temporal:
+  connectionRef: lab-temporal
+  namespace: default
+
+rollout:
+  strategy: AllAtOnce
+
+sunset:
+  scaledownDelay: 5s
+  deleteDelay: 10s

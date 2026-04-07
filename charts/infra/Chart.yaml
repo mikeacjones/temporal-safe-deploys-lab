@@ -1,0 +1,4 @@
+apiVersion: v2
+name: temporal-lab-infra
+version: 0.1.0
+description: Shared infrastructure for the Temporal safe deploys lab

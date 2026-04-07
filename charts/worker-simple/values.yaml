@@ -1,0 +1,9 @@
+image:
+  repository: k3d-registry.localhost:5050/research-agent
+  tag: "latest"
+
+replicas: 1
+
+temporal:
+  address: "temporal-lab-devenv:7233"
+  namespace: default

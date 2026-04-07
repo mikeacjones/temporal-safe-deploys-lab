@@ -1,0 +1,4 @@
+apiVersion: v2
+name: research-agent-simple
+version: 0.1.0
+description: Simple Kubernetes Deployment for the research agent (no Worker Controller)

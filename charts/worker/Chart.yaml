@@ -1,0 +1,4 @@
+apiVersion: v2
+name: research-agent-worker
+version: 0.1.0
+description: TemporalWorkerDeployment for the research agent

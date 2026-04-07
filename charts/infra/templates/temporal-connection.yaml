@@ -1,0 +1,7 @@
+apiVersion: temporal.io/v1alpha1
+kind: TemporalConnection
+metadata:
+  name: lab-temporal
+  namespace: {{ .Release.Namespace }}
+spec:
+  hostPort: "temporal-lab-devenv:7233"
