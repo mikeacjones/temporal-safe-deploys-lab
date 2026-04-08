@@ -2,7 +2,8 @@ import asyncio
 import os
 
 from temporalio.client import Client
-from temporalio.worker import Worker
+from temporalio.common import VersioningBehavior, WorkerDeploymentVersion
+from temporalio.worker import Worker, WorkerDeploymentConfig
 
 from src.activities import (
     execute_research_step,
@@ -13,6 +14,8 @@ from src.activities import (
 from src.workflows import ResearchPollingWorkflow, ResearchWorkflow
 
 TASK_QUEUE = "research-agent"
+DEPLOYMENT_NAME = os.environ.get("TEMPORAL_DEPLOYMENT_NAME", "research-agent")
+BUILD_ID = os.environ.get("TEMPORAL_WORKER_BUILD_ID", "local-dev")
 
 
 async def main() -> None:
@@ -31,9 +34,18 @@ async def main() -> None:
             synthesize_findings,
             fact_check,
         ],
+        deployment_config=WorkerDeploymentConfig(
+            version=WorkerDeploymentVersion(
+                deployment_name=DEPLOYMENT_NAME,
+                build_id=BUILD_ID,
+            ),
+            use_worker_versioning=True,
+            default_versioning_behavior=VersioningBehavior.PINNED,
+        ),
     )
 
-    print(f"Worker started on task queue '{TASK_QUEUE}'")
+    print(f"Worker started on task queue '{TASK_QUEUE}' "
+          f"(deployment={DEPLOYMENT_NAME}, build={BUILD_ID})")
     await worker.run()
 
 
